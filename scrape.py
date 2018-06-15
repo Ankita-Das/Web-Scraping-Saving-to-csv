@@ -1,24 +1,26 @@
-
+#The libraries are imported
 import urllib.request
 import datetime
 from bs4 import BeautifulSoup
 import csv
 from scrape2 import cake_desp
-quote_page = "https://www.bakingo.com/cake-delivery"
+quote_page = "https://www.bakingo.com/cake-delivery" #Site of scraping
 page = urllib.request.urlopen(quote_page)
 soup = BeautifulSoup(page, "html.parser")
 
-csv_file=open('scraped.csv','w')
+csv_file=open('scraped.csv','w') #The csv file is written
 csv_writer=csv.writer(csv_file)
-csv_writer.writerow(['Product_ID','Links','Title','Short_title','Price','Introducing','Date_Time','Description'])
+csv_writer.writerow(['Product_ID','Links','Title','Short_title','Price','Introducing','Date_Time','Description'])#The columns of csv files are named.
 
-img_list=[]
+#The lists are defined
+img_list=[] 
 tit_list=[]
 s_tit_list=[]
 p_list=[]
 intro_list=[]
 pid=[]
 desc_list=[]
+dttm=[]
 
 
 print('**************************************************')
@@ -26,7 +28,7 @@ print('**************************************************')
 
 
 
-
+#IMAGE URLS extracted
 for b in soup.find_all("div",{'class':'cake-img'}):
     for a in b.find_all('img',src=True):
         #print ("Found the URL:", a['src'])
@@ -35,6 +37,7 @@ for b in soup.find_all("div",{'class':'cake-img'}):
         img_list=img_list+[links]
 
 i=1
+#CAKE-TITLES extracted
 for c in soup.find_all("div",{'class':'cake-title'}):
     #print ("Found the URL:",b.text.strip())
     title=c.text.strip()
@@ -44,6 +47,7 @@ for c in soup.find_all("div",{'class':'cake-title'}):
     #csv_writer.writerow([links,title])
 
 
+ #SHORT-TITLE extracted
 for e in soup.find_all("div",{'class':'cake-pd'}):
     #print ("Found the URL:",b.text)
     s_tit=e.text
@@ -56,7 +60,7 @@ for f in soup.find_all("div",{'class':'cake-p'}):
     price=f.text
     #csv_writer.writerow([links])
     p_list=p_list+[price]
-dttm=[]
+
 for g in soup.find_all("div",{'class':'cake-desc'}):
     #print ("Found the URL to move:",b.text)
     intro=g.text.strip()
