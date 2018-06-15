@@ -54,20 +54,24 @@ for e in soup.find_all("div",{'class':'cake-pd'}):
     #csv_writer.writerow([links])
     s_tit_list=s_tit_list+[s_tit]
 
-    
+#PRICE extracted   
 for f in soup.find_all("div",{'class':'cake-p'}):
     #print ("Found the URL:",b.text)
     price=f.text
     #csv_writer.writerow([links])
     p_list=p_list+[price]
 
+#CAKE-INTRODUCTION extracted and DATE-TIME saved to csv.
 for g in soup.find_all("div",{'class':'cake-desc'}):
     #print ("Found the URL to move:",b.text)
     intro=g.text.strip()
-    #csv_writer.writerow([links])
     intro_list=intro_list+[intro]
     dttm=dttm+[datetime.datetime.now()]
 
+    
+#The LINKS to the next page are extracted 
+#and the passed to the function cake_desp().
+#This function in (next_url_scrape.py)[https://github.com/Ankita-Das/Web-Scraping-Saving-to-csv/blob/master/next_url_scrape.py] file then scrapes the cake description of the cake(whose url is passed) 
 for i in soup.find_all("div",{'class':'cake-title'}):
     for j in i.find_all('a',href=True):
         url="https://www.bakingo.com"
@@ -78,8 +82,6 @@ for i in soup.find_all("div",{'class':'cake-title'}):
 
 
 
-'''for d in dttm:
-    dttm=dttm+[datetime.datetime.now()];'''
     
 
 zipped=zip(pid,img_list,tit_list,s_tit_list,p_list,intro_list,dttm,desc_list)
