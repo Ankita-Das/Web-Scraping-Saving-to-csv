@@ -83,7 +83,7 @@ for i in soup.find_all("div",{'class':'cake-title'}):
 
 
     
-
+#Writing to the csv file from lists.
 zipped=zip(pid,img_list,tit_list,s_tit_list,p_list,intro_list,dttm,desc_list)
 d=list(zipped)#list of lists
 #print(d)
